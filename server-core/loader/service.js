@@ -30,17 +30,18 @@ module.exports = (app) => {
     // 转化写法
     name = name.replace(/[_-][a-z]/gi, (s) => s.substring(1).toUpperCase());
 
+    const names = name.split(sep);
     let temp = service;
-    for (let i = 0, len = name.length; i < len; i++) {
+    for (let i = 0, len = names.length; i < len; i++) {
       if (i === len - 1) {
         // 说明是文件
         const ServiceClass = require(path.resolve(file))(app);
-        temp[name[i]] = new ServiceClass();
+        temp[names[i]] = new ServiceClass();
       } else {
-        if (!temp[name[i]]) {
-          temp[name[i]] = {};
+        if (!temp[names[i]]) {
+          temp[names[i]] = {};
         }
-        temp = temp[name[i]];
+        temp = temp[names[i]];
       }
     }
   }

@@ -29,7 +29,7 @@ module.exports = {
       // 挂载项目配置项
       app.options = options;
 
-      const baseDir = path.resolve(__dirname, `.${path.sep}app`);
+      const baseDir = path.resolve(__dirname, `..${sep}`, `.${path.sep}app`);
       app.baseDir = baseDir;
 
       // 加载环境
@@ -58,7 +58,7 @@ module.exports = {
       // 注册全局中间件
       try {
         require(path.resolve(process.cwd(), `.${sep}app${sep}middleware.js`))(app);
-        console.log("------ [loader] global middleware done ------=");
+        console.log("------ [loader] global middleware done ------");
       } catch (error) {
         console.log("[exception] : there is on global middleware file.");
       }

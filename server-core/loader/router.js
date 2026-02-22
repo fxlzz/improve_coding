@@ -12,13 +12,12 @@ module.exports = (app) => {
   const targetPath = path.resolve(app.baseDir, `.${sep}router`);
   const fileList = glob.sync(path.resolve(targetPath, `.${sep}**${sep}**.js`));
 
+  const router = new KoaRouter();
+
   // 注册所有 router 文件
   for (const file of fileList) {
-    // modules.export = (app, router) => router.get('xxx', async (ctx, next) => {})
     require(path.resolve(file))(app, router);
   }
-
-  const router = new KoaRouter();
 
   router.get("*", async (ctx, next) => {
     ctx.status = 302; // 临时重定向
