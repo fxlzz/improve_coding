@@ -1,4 +1,4 @@
-exports.LOCAL = "loacl";
+exports.LOCAL = "local";
 
 exports.BETA = "beta";
 

@@ -1,5 +1,6 @@
 const Koa = require("koa");
 const path = require("path");
+const { sep } = path;
 const env = require("./env");
 
 // 加载解析 loader
@@ -56,10 +57,10 @@ module.exports = {
 
       // 注册全局中间件
       try {
-        require(`${app.baseDir}${sep}middleware.js`)(app);
+        require(path.resolve(process.cwd(), `.${sep}app${sep}middleware.js`))(app);
         console.log("------ [loader] global middleware done ------=");
       } catch (error) {
-        console.log("[exception] : there is on middleware file.");
+        console.log("[exception] : there is on global middleware file.");
       }
 
       // 注册路由
