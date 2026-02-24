@@ -10,15 +10,29 @@
     <h1 style="color: red">page1</h1>
     <button onclick="handleClick()">Click me</button>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/js-md5@0.8.3/src/md5.min.js"></script>
   <script>
+    const signKey = "asdf2983rsdhfk784oh8s99aojdisj";
+    const st = Date.now();
+    const sRand = Math.random().toString(36).substring(2);
+    const signature = md5(`${signKey}_${st}_${sRand}`);
     function handleClick() {
-      fetch("/api/projects")
-        .then((response) => response.json())
+      fetch("/api/projects", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          s_t: st,
+          s_sign: signature,
+          s_rand: sRand,
+        },
+        data: JSON.stringify({ a: 1, b: 2 }),
+      })
+        .then((res) => res.json())
         .then((data) => {
           console.log(data);
         })
-        .catch((error) => {
-          console.error("Error fetching projects:", error);
+        .catch((err) => {
+          console.error(err);
         });
     }
   </script>

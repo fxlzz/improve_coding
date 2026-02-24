@@ -28,6 +28,9 @@ module.exports = (app) => {
     }),
   );
 
+  // API 请求签名验证
+  app.use(app.middlewares.apiSignVerify);
+
   // 错误处理
   app.use(app.middlewares.errorHandler);
 };
