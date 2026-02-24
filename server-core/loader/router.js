@@ -19,9 +19,13 @@ module.exports = (app) => {
     require(path.resolve(file))(app, router);
   }
 
-  router.get("*", async (ctx, next) => {
-    ctx.status = 302; // 临时重定向
-    ctx.redirect(`${app?.options?.index ?? "/"}`);
+  const indexPath = app?.options?.index ?? "/";
+  router.get(/(.*)/, async (ctx, next) => {
+    if (ctx.path === indexPath || ctx.path === "/") {
+      return next();
+    }
+    ctx.status = 302;
+    ctx.redirect(indexPath);
   });
 
   // 路由注册到 app 上
