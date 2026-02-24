@@ -24,7 +24,7 @@ module.exports = (app) => {
     let name = path.resolve(file);
     // 截取文件路径
     name = name.substring(
-      name.lastIndexOf(`controller${sep}`) + "controller/".length,
+      name.lastIndexOf(`controller${sep}`) + `controller${sep}`.length,
       name.lastIndexOf("."),
     );
     // 转化写法

@@ -24,7 +24,7 @@ module.exports = (app) => {
     let name = path.resolve(file);
     // 截取文件路径
     name = name.substring(
-      name.lastIndexOf(`service${sep}`) + "service".length,
+      name.lastIndexOf(`service${sep}`) + `service${sep}`.length,
       name.lastIndexOf("."),
     );
     // 转化写法
