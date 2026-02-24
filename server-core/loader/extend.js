@@ -16,13 +16,12 @@ module.exports = (app) => {
   const targetPath = path.resolve(app.baseDir, `.${sep}extend`);
   const fileList = glob.sync(path.resolve(targetPath, `.${sep}**.js`));
 
-  const extend = {};
   for (const file of fileList) {
     let name = path.resolve(file);
 
     // 转化写法 -> '-' 转化为驼峰写法
     name = name.substring(
-      name.lastIndexOf(`${sep}extend`) + "extend".length,
+      name.lastIndexOf(`extend${sep}`) + `extend${sep}`.length,
       name.lastIndexOf("."),
     );
     name = name.replace(/[_-][a-z]/gi, (s) => s.substring(1).toUpperCase());
@@ -37,6 +36,4 @@ module.exports = (app) => {
 
     app[name] = require(path.resolve(file))(app);
   }
-  // 挂载到 app 上
-  app.extend = extend;
 };
