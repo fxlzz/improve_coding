@@ -34,38 +34,38 @@ module.exports = {
 
       // 加载环境
       app.env = env();
-      console.log(`------ [start] env: ${app.env.get()} ------`);
+      console.log(`--- [start] env: ${app.env.get()} ---`);
 
       // 加载loader
       middlewareLoader(app);
-      console.log(`------ [loader] middleware done  ------`);
+      console.log(`--- [loader] middleware done  ---`);
 
       routerSchemaLoader(app);
-      console.log(`------ [loader] router-schema done  ------`);
+      console.log(`--- [loader] router-schema done  ---`);
 
       controllerLoader(app);
-      console.log(`------ [loader] controller done  ------`);
+      console.log(`--- [loader] controller done  ---`);
 
       serviceLoader(app);
-      console.log(`------ [loader] service done  ------`);
+      console.log(`--- [loader] service done  ---`);
 
       configLoader(app);
-      console.log(`------ [loader] config done  ------`);
+      console.log(`--- [loader] config done  ---`);
 
       extendLoader(app);
-      console.log(`------ [loader] extend done  ------`);
+      console.log(`--- [loader] extend done  ---`);
 
       // 注册全局中间件
       try {
         require(path.resolve(process.cwd(), `.${sep}app${sep}middleware.js`))(app);
-        console.log("------ [loader] global middleware done ------");
+        console.log("--- [loader] global middleware done ---");
       } catch (error) {
         console.log("[exception] : there is on global middleware file.");
       }
 
       // 注册路由
       routerLoader(app);
-      console.log(`------ [loader] router done  ------`);
+      console.log(`--- [loader] router done  ---`);
 
       app.listen(port, host);
       console.log(`server running on port: ${port}`);

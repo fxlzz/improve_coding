@@ -27,4 +27,7 @@ module.exports = (app) => {
       enableTypes: ["json", "form", "text"],
     }),
   );
+
+  // 错误处理
+  app.use(app.middlewares.errorHandler);
 };
