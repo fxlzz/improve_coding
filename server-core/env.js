@@ -4,22 +4,22 @@ module.exports = (app) => {
   return {
     // 是否为本地环境
     isLocal() {
-      return process.env._NEV === LOCAL;
+      return process.env._ENV === LOCAL;
     },
 
     // 是否为测试环境
     isBeta() {
-      return process.env._NEV === BETA;
+      return process.env._ENV === BETA;
     },
 
     // 是否为生产环境
     isProd() {
-      return process.env._NEV === PROD;
+      return process.env._ENV === PROD;
     },
 
     // 获取当前环境
     get() {
-      return process.env._NEV ?? LOCAL;
+      return process.env._ENV ?? LOCAL;
     },
   };
 };

@@ -24,23 +24,24 @@ module.exports = (app) => {
     let name = path.resolve(file);
     // 截取文件路径
     name = name.substring(
-      name.lastIndexOf(`service${sep}`) + "service".length,
+      name.lastIndexOf(`service${sep}`) + `service${sep}`.length,
       name.lastIndexOf("."),
     );
     // 转化写法
     name = name.replace(/[_-][a-z]/gi, (s) => s.substring(1).toUpperCase());
 
+    const names = name.split(sep);
     let temp = service;
-    for (let i = 0, len = name.length; i < len; i++) {
+    for (let i = 0, len = names.length; i < len; i++) {
       if (i === len - 1) {
         // 说明是文件
         const ServiceClass = require(path.resolve(file))(app);
-        temp[name[i]] = new ServiceClass();
+        temp[names[i]] = new ServiceClass();
       } else {
-        if (!temp[name[i]]) {
-          temp[name[i]] = {};
+        if (!temp[names[i]]) {
+          temp[names[i]] = {};
         }
-        temp = temp[name[i]];
+        temp = temp[names[i]];
       }
     }
   }

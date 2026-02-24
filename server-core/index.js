@@ -1,5 +1,6 @@
 const Koa = require("koa");
 const path = require("path");
+const { sep } = path;
 const env = require("./env");
 
 // 加载解析 loader
@@ -28,43 +29,43 @@ module.exports = {
       // 挂载项目配置项
       app.options = options;
 
-      const baseDir = path.resolve(__dirname, `.${path.sep}app`);
+      const baseDir = path.resolve(__dirname, `..${sep}`, `.${path.sep}app`);
       app.baseDir = baseDir;
 
       // 加载环境
       app.env = env();
-      console.log(`------ [start] env: ${app.env.get()} ------`);
+      console.log(`--- [start] env: ${app.env.get()} ---`);
 
       // 加载loader
       middlewareLoader(app);
-      console.log(`------ [loader] middleware done  ------`);
+      console.log(`--- [loader] middleware done  ---`);
 
       routerSchemaLoader(app);
-      console.log(`------ [loader] router-schema done  ------`);
+      console.log(`--- [loader] router-schema done  ---`);
 
       controllerLoader(app);
-      console.log(`------ [loader] controller done  ------`);
+      console.log(`--- [loader] controller done  ---`);
 
       serviceLoader(app);
-      console.log(`------ [loader] service done  ------`);
+      console.log(`--- [loader] service done  ---`);
 
       configLoader(app);
-      console.log(`------ [loader] config done  ------`);
+      console.log(`--- [loader] config done  ---`);
 
       extendLoader(app);
-      console.log(`------ [loader] extend done  ------`);
+      console.log(`--- [loader] extend done  ---`);
 
       // 注册全局中间件
       try {
-        require(`${app.baseDir}${sep}middleware.js`)(app);
-        console.log("------ [loader] global middleware done ------=");
+        require(path.resolve(process.cwd(), `.${sep}app${sep}middleware.js`))(app);
+        console.log("--- [loader] global middleware done ---");
       } catch (error) {
-        console.log("[exception] : there is on middleware file.");
+        console.log("[exception] : there is on global middleware file.");
       }
 
       // 注册路由
       routerLoader(app);
-      console.log(`------ [loader] router done  ------`);
+      console.log(`--- [loader] router done  ---`);
 
       app.listen(port, host);
       console.log(`server running on port: ${port}`);
