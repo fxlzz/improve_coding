@@ -5,6 +5,9 @@ const path = require("path");
 const { sep } = path;
 
 module.exports = (app) => {
+  // 错误处理
+  app.use(app.middlewares.errorHandler);
+
   // 配置静态文件目录
   app.use(koaStatic(path.resolve(__dirname, `.${sep}public`)));
 
@@ -30,7 +33,4 @@ module.exports = (app) => {
 
   // API 请求签名验证
   app.use(app.middlewares.apiSignVerify);
-
-  // 错误处理
-  app.use(app.middlewares.errorHandler);
 };
