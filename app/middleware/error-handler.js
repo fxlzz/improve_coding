@@ -3,7 +3,7 @@ module.exports = (app) => {
     try {
       await next();
     } catch (error) {
-      const { message } = error;
+      const { code, message } = error;
 
       app.logger.info(error);
       app.logger.error("-- [exception] --: ", error);
@@ -15,13 +15,14 @@ module.exports = (app) => {
         return;
       }
 
+      const isBizError = Number.isFinite(code);
       const body = {
         success: false,
-        code: 50000,
-        message: "服务器异常",
+        code: isBizError ? code : 50000,
+        message: isBizError ? message || "请求失败" : "服务器异常",
       };
 
-      ctx.status = 200; // http 请求没问题，服务器逻辑有问题
+      ctx.status = 200;
       ctx.body = body;
     }
   };

@@ -29,5 +29,3 @@ module.exports = (app) => {
 
   app.routerSchema = routerSchema;
 };
-
-7;
