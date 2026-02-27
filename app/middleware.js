@@ -33,4 +33,7 @@ module.exports = (app) => {
 
   // API 请求签名验证
   app.use(app.middlewares.apiSignVerify);
+
+  // API 参数校验
+  app.use(app.middlewares.apiParamsVerify);
 };

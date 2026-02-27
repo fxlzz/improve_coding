@@ -17,7 +17,7 @@
     const sRand = Math.random().toString(36).substring(2);
     const signature = md5(`${signKey}_${st}_${sRand}`);
     function handleClick() {
-      fetch("/api/projects", {
+      fetch("/api/projects?proj_key=sad", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -25,7 +25,6 @@
           s_sign: signature,
           s_rand: sRand,
         },
-        data: JSON.stringify({ a: 1, b: 2 }),
       })
         .then((res) => res.json())
         .then((data) => {
