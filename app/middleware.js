@@ -8,7 +8,7 @@ module.exports = (app) => {
   // 错误处理
   app.use(app.middlewares.errorHandler);
 
-  // 配置静态文件目录
+  // 指定静态文件目录
   app.use(koaStatic(path.resolve(__dirname, `.${sep}public`)));
 
   // 配置模板引擎
