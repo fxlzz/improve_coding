@@ -1,11 +1,11 @@
 const webpack = require("webpack");
-const webpackConfig = require("./config/webpack.base.js");
+const webpackProdConfig = require("./config/webpack.prod.js");
 
 /**
  * @param {Error} err 错误信息
  * @param {object} stats webpack 的统计信息（打包过程的各种细节）
  */
-webpack(webpackConfig, (err, stats) => {
+webpack(webpackProdConfig, (err, stats) => {
   if (err) {
     console.log(err);
     // throw err;

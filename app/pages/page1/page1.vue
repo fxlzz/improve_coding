@@ -4,6 +4,7 @@
 
 <script setup>
 import test from "@common/test";
+import "./test.css";
 test();
 
 console.log("page1");
