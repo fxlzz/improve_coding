@@ -7,7 +7,7 @@ module.exports = (app) => {
      * 渲染页面
      */
     async renderPage(ctx) {
-      await ctx.render(`output${sep}views.${ctx.params.page}`);
+      await ctx.render(`dist${sep}entry.${ctx.params.page}`);
     }
   };
 };
