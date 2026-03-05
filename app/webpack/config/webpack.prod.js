@@ -12,6 +12,7 @@ module.exports = merge.smart(webpackBaseConfig, {
     mode: "production",
     output: {
         clean: true, // 相当于 CleanWebpackPlugin
+        // contenthash 使得浏览器缓存失效
         filename: "js/[name]_[contenthash:8].bundle.js",
         path: path.resolve(publicPath, "./dist/prod"),
         publicPath: "/dist/prod/",
