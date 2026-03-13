@@ -1,5 +1,4 @@
-import { createApp } from "vue";
+import boat from "@pages/boat";
 import page1 from "./page1.vue";
 
-const app = createApp(page1);
-app.mount("#app");
+boat(page1);

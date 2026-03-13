@@ -1,4 +1,5 @@
 const { BizError } = require("../utils/biz-error");
+const { CODE_API_PARAMS_VERIFY_ERROR } = require("../constant/sgin");
 const Ajv = require("ajv");
 const ajv = new Ajv();
 
@@ -59,7 +60,7 @@ module.exports = (app) => {
       app.logger.error(
         `[${method} ${path}] - API 参数校验失败: ${ajv.errorsText(validate.errors)}`,
       );
-      throw BizError(442, `API 参数校验失败: ${ajv.errorsText(validate.errors)}`);
+      throw BizError(CODE_API_PARAMS_VERIFY_ERROR, `API 参数校验失败: ${ajv.errorsText(validate.errors)}`);
     }
 
     await next();

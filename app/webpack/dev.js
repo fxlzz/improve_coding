@@ -11,7 +11,7 @@ const hotMiddleware = require("webpack-hot-middleware");
 // 获取 webpack 开发环境配置和开发服务器配置
 const { webpackDevConfig, DEV_SERVER_CONFIG } = require("./config/webpack.dev");
 
-consoler.info("请等待，webpack 开发服务器正在启动...");
+consoler.info("webpack 开发服务器正在启动...");
 
 const app = express();
 const complier = webpack(webpackDevConfig);
@@ -41,5 +41,5 @@ app.use(hotMiddleware(complier, {
 
 const port = DEV_SERVER_CONFIG.PORT;
 app.listen(port, () => {
-    console.log(`开发服务器正在运行： ${port}`);
+    console.log(`开发服务器正在运行，端口：${port}`);
 });
