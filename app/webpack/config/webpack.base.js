@@ -2,13 +2,10 @@ const webpack = require("webpack");
 const path = require("path");
 const glob = require("glob");
 
-const businessPath = path.resolve(__dirname, "../../", "./pages");
-const publicPath = path.resolve(__dirname, "../../public");
-const templatePath = path.resolve(__dirname, "../../template");
+const { businessPath, publicPath, templatePath } = require("./path");
 
 const { VueLoaderPlugin } = require("vue-loader");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const entryList = {};
 const htmlWebpackPluginList = [];
@@ -34,24 +31,24 @@ glob.sync(entryPath).forEach((file) => {
 module.exports = {
   // 入口配置
   entry: entryList,
-  // 输出产物配置
-  output: {
-    filename: "js/[name]_[chunkhash:8].bundle.js",
-    path: path.resolve(publicPath, "./dist/prod"),
-    publicPath: "/dist/prod/",
-    crossOriginLoading: "anonymous",
+  // 缓存配置
+  cache: {
+    type: "filesystem", // 持久化缓存
+    buildDependencies: {
+      config: [__filename], //当配置文件修改时，整个缓存失效
+    }
   },
   // 模块解析配置
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: ["vue-loader"],
+        use: "vue-loader",
       },
       {
         test: /\.js$/,
         include: businessPath,
-        use: ["babel-loader"],
+        use: "swc-loader",
       },
       {
         test: /\.css$/,
@@ -79,7 +76,7 @@ module.exports = {
   },
   // 配置解析模块的具体行为
   resolve: {
-    extensions: [".vue", ".js", ".less"],
+    extensions: [".vue", ".js", ".less", ".json"],
     alias: {
       "@pages": path.resolve(businessPath),
       "@common": path.resolve(businessPath, "./common"),
@@ -96,6 +93,8 @@ module.exports = {
     // 把第三方库暴露到 window context 下
     new webpack.ProvidePlugin({
       Vue: "vue",
+      axios: "axios",
+      _: "lodash",
     }),
     // 定义全局变量
     new webpack.DefinePlugin({
@@ -105,8 +104,6 @@ module.exports = {
     }),
     // 构建最终产物
     ...htmlWebpackPluginList,
-    // 自动删除变动后的文件
-    new CleanWebpackPlugin(),
   ],
   // 优化打包/构建
   optimization: {
