@@ -27,9 +27,10 @@ module.exports = (app) => {
     }
 
     const signature = md5(`${signKey}_${st}_${sRand}`);
-    app.logger.info(`[${method} ${path}] - signature: ${signature}`);
+    const isRight = signature === sSign;
+    app.logger.info(`[${method} ${path}] - sign-is-right?: ${isRight}, signature: ${signature}`);
 
-    if (!st || !sSign || signature !== sSign || Date.now() - Number(st) > SIGN_TIMEOUT) {
+    if (!st || !sSign || !isRight || Date.now() - Number(st) > SIGN_TIMEOUT) {
       throw BizError(CODE_SIGN_ERROR, "签名验证失败或API超时");
     }
 
