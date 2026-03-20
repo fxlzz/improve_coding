@@ -8,7 +8,6 @@ module.exports = (app) => {
     async getModelList(ctx) {
       const { model: modelService } = app.service;
       const modelList = await modelService.getModelList();
-      console.log(JSON.stringify(modelList));
 
       /** 简化 model 结构
        *  model -> {key, name, desc}

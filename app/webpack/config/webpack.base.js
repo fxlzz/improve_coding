@@ -36,7 +36,7 @@ module.exports = {
     type: "filesystem", // 持久化缓存
     buildDependencies: {
       config: [__filename], //当配置文件修改时，整个缓存失效
-    }
+    },
   },
   // 模块解析配置
   module: {
@@ -83,7 +83,7 @@ module.exports = {
       "@components": path.resolve(businessPath, "./components"),
       "@stores": path.resolve(businessPath, "./stores"),
       "@utils": path.resolve(businessPath, "./utils"),
-      "@api": path.resolve(businessPath, "./api"),
+      "@apis": path.resolve(businessPath, "./apis"),
     },
   },
   // 插件配置（在合适的时机干预 webpack 解析）
@@ -100,7 +100,6 @@ module.exports = {
     new webpack.DefinePlugin({
       __VUE_OPTIONS_API__: "true", // 支持 vue 解析 optionsAPI
       __VUE_PROD_DEVTOOLS__: "false", // 解析过程中禁用调式工具
-      __VUE_PROD_HYDRTION_MISMATCH_DETAYILS__: "false",
     }),
     // 构建最终产物
     ...htmlWebpackPluginList,
@@ -134,7 +133,7 @@ module.exports = {
           priority: 10,
           reuseExistingChunk: true, // 复用已有的 chunk
         },
-      }
+      },
     },
-  }
+  },
 };
