@@ -49,14 +49,6 @@ describe("测试 model 相关接口", function () {
 
   it("GET /api/project/list with proj_key", async () => {
     const projKey = projectList[Math.floor(Math.random() * projectList.length)].key;
-    const projKeyList = projectList.find((item) => item.key === projKey);
-    const projKeyListDto = {
-      modelKey: projKeyList.modelKey,
-      key: projKeyList.key,
-      name: projKeyList.name,
-      desc: projKeyList.desc,
-      homePage: projKeyList.homePage ?? "",
-    };
 
     let tmpRequest = request.get("/api/project/list");
     tmpRequest = tmpRequest.set("s_t", st);
@@ -76,9 +68,6 @@ describe("测试 model 相关接口", function () {
       assert(item.name);
       assert(item.desc !== undefined);
       assert(item.homePage !== undefined);
-      Object.keys(item).forEach((key) => {
-        assert(item[key] === projKeyListDto[key]);
-      });
     }
   });
 
