@@ -3,6 +3,23 @@ module.exports = (app) => {
 
   return class ModelController extends BaseController {
     /**
+     * 获取 project 信息, 若传递 proj_key 则返回对应 project item，若未传递，proj_key 则返回全量
+     * @param {string} proj_key ctx.request.query
+     */
+    async getProjectList(ctx) {
+      const { model: modelService } = app.service;
+      const { proj_key } = ctx.request.query;
+      const projectList = await modelService.getProjectList({ proj_key });
+
+      const dtoProjectList = projectList.filter(Boolean).map((proItem) => {
+        const { modelKey, key, name, desc, homePage = "" } = proItem;
+        return { modelKey, key, name, desc, homePage };
+      });
+
+      this.success(ctx, dtoProjectList);
+    }
+
+    /**
      * 获取 model 信息
      */
     async getModelList(ctx) {
