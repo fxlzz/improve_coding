@@ -1,6 +1,6 @@
 module.exports = {
-  mode: "dashboard",
   name: "tabao",
+  homePage: "",
   desc: "淘宝模板",
   menu: [
     {
@@ -16,6 +16,7 @@ module.exports = {
       key: "active",
       name: "数据分析",
       menuType: "group",
+      moduleType: "sider",
       submenu: [
         {
           key: "test1",

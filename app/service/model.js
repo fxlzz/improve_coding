@@ -4,6 +4,20 @@ module.exports = (app) => {
 
   return class ModelService extends BaseService {
     /**
+     * 获取 proj_key 对应的 project 信息
+     */
+    getProject({ proj_key }) {
+      let projectList = null;
+      modelList.forEach((modelItem) => {
+        const { project } = modelItem;
+        if (project[proj_key]) {
+          projectList = project[proj_key];
+        }
+      });
+      return projectList;
+    }
+
+    /**
      * 获取 project 信息, 若传递 proj_key 则返回对应 project item，若未传递，proj_key 则返回全量
      */
     getProjectList({ proj_key }) {

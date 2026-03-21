@@ -1,11 +1,12 @@
 module.exports = {
-  mode: "dashboard",
   name: "pdd",
+  homePage: "",
   desc: "拼多多模板",
   menu: [
     {
       key: "product",
       name: "商品管理（拼多多版）",
+      menuType: "module",
       moduleType: "iframe",
       iframeConfig: {
         path: "http://wwww.baidu.com",
