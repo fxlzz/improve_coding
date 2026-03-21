@@ -1,3 +1,9 @@
+/**
+ * model 相关接口的测试用例
+ * 新增测试用例写在最后面（方便查看结果）
+ * npm run test 执行测试
+ */
+
 const assert = require("assert");
 const supertest = require("supertest");
 const md5 = require("md5");
@@ -89,6 +95,94 @@ describe("测试 model 相关接口", function () {
       for (const projKey in modelItem.project) {
         assert(modelItem.project[projKey].key);
         assert(modelItem.project[projKey].name);
+      }
+    }
+  });
+
+  it("GET /api/project with error proj_key", async () => {
+    let tmpRequest = request.get("/api/project");
+    tmpRequest = tmpRequest.set("s_t", st);
+    tmpRequest = tmpRequest.set("s_sign", md5(`${signKey}_${st}_${sRand}`));
+    tmpRequest = tmpRequest.set("s_rand", sRand);
+    tmpRequest = tmpRequest.query({
+      proj_key: "xxxxxxxxxx",
+    });
+
+    const res = await tmpRequest;
+    assert(res.body.success === false);
+    assert(res.body.message.includes("获取项目异常"));
+    assert(res.body.code === 500);
+  });
+
+  it("GET /api/project without proj_key", async () => {
+    let tmpRequest = request.get("/api/project");
+    tmpRequest = tmpRequest.set("s_t", st);
+    tmpRequest = tmpRequest.set("s_sign", md5(`${signKey}_${st}_${sRand}`));
+    tmpRequest = tmpRequest.set("s_rand", sRand);
+    const res = await tmpRequest;
+
+    assert(res.body.success === false);
+    assert(res.body.message.includes("API 参数校验失败"));
+    assert(res.body.code === 442);
+  });
+
+  it("GET /api/project with right proj_key", async () => {
+    for (let i = 0; i < projectList.length; i++) {
+      const project = projectList[i];
+      const { key: projKey } = project;
+
+      let tmpRequest = request.get("/api/project");
+      tmpRequest = tmpRequest.set("s_t", st);
+      tmpRequest = tmpRequest.set("s_sign", md5(`${signKey}_${st}_${sRand}`));
+      tmpRequest = tmpRequest.set("s_rand", sRand);
+      tmpRequest = tmpRequest.query({
+        proj_key: projKey,
+      });
+
+      const res = await tmpRequest;
+      const resData = res.body.data;
+      assert(res.body.success === true);
+
+      assert(resData.name);
+      assert(resData.desc !== undefined);
+      assert(resData.homePage !== undefined);
+      assert(resData.menu);
+
+      resData.menu.forEach((menuItem) => {
+        checkMenuItem(menuItem);
+      });
+    }
+
+    // 递归检查 menu 项
+    function checkMenuItem(menuItem) {
+      console.log(`--------- check menuKey: ${menuItem.key} ---------`);
+      assert(menuItem.key);
+      assert(menuItem.name);
+      assert(menuItem.menuType !== undefined);
+
+      if (menuItem.menuType === "group") {
+        assert(menuItem.submenu !== undefined);
+        menuItem.submenu.forEach((submenuItem) => checkMenuItem(submenuItem));
+      } else {
+        checkModule(menuItem);
+      }
+    }
+
+    function checkModule(menuItem) {
+      assert(menuItem.moduleType !== undefined);
+
+      if (menuItem.moduleType === "sider") {
+        assert(menuItem.siderConfig.menu);
+        menuItem.siderConfig.menu.forEach((menuItem) => checkMenuItem(menuItem));
+      }
+      if (menuItem.moduleType === "schema") {
+        assert(menuItem.schemaConfig.api);
+      }
+      if (menuItem.moduleType === "iframe") {
+        assert(menuItem.iframeConfig.path);
+      }
+      if (menuItem.moduleType === "custom") {
+        assert(menuItem.customConfig.path);
       }
     }
   });

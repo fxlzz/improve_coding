@@ -10,11 +10,11 @@ module.exports = {
       name: "", // 菜单名称
       menuType: "", // 菜单类型 module / group
       submenu: [{}], // menuType === group 可以存在子菜单（下拉菜单选项）
+      moduleType: "", // 模板页类型 sider / schema / iframe / custom
       siderConfig: {
         // 侧边栏菜单
         menu: [{}],
       },
-      moduleType: "", // 模板页类型 schema / iframe / custom
       iframeConfig: {
         path: "", // url
       },

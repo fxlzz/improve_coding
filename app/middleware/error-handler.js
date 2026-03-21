@@ -1,3 +1,7 @@
+/**
+ * 内部代码，使用 throw BizError(code, message) 抛出错误
+ * 改中间件捕获错误，同一封装成失败响应结构
+ */
 module.exports = (app) => {
   return async (ctx, next) => {
     try {
@@ -5,7 +9,6 @@ module.exports = (app) => {
     } catch (error) {
       const { code, message } = error;
 
-      app.logger.info(error);
       app.logger.error("-- [exception] --: ", error);
       app.logger.error("-- [exception] --: ", message);
 

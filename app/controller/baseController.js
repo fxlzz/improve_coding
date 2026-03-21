@@ -1,4 +1,5 @@
 module.exports = (app) => {
+  const { BizError } = require("../utils/biz-error");
   return class BaseController {
     constructor() {
       this.app = app;
@@ -27,11 +28,7 @@ module.exports = (app) => {
      * @param {object} code - 错误码
      */
     fail(ctx, message = "", code = 500) {
-      ctx.body = {
-        success: false,
-        message,
-        code,
-      };
+      throw BizError(code, message);
     }
   };
 };
