@@ -48,6 +48,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: businessPath,
+        exclude: /\.vue$/,
         use: "swc-loader",
       },
       {
