@@ -84,6 +84,7 @@ module.exports = {
       "@stores": path.resolve(businessPath, "./stores"),
       "@utils": path.resolve(businessPath, "./utils"),
       "@apis": path.resolve(businessPath, "./apis"),
+      "@widgets": path.resolve(businessPath, "./widgets"),
     },
   },
   // 插件配置（在合适的时机干预 webpack 解析）

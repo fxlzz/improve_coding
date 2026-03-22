@@ -1,5 +1,5 @@
 module.exports = {
-  name: "tabao",
+  name: "淘宝",
   homePage: "",
   desc: "淘宝模板",
   menu: [

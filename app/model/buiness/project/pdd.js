@@ -1,5 +1,5 @@
 module.exports = {
-  name: "pdd",
+  name: "拼多多",
   homePage: "",
   desc: "拼多多模板",
   menu: [

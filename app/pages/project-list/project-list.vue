@@ -1,5 +1,5 @@
 <template>
-  <headerContainer title="项目列表">
+  <HeaderContainer title="项目列表">
     <template #main-content>
       <div v-loading="loading">
         <div v-for="item in modelList" :key="item.model?.key">
@@ -40,11 +40,11 @@
         </div>
       </div>
     </template>
-  </headerContainer>
+  </HeaderContainer>
 </template>
 
 <script setup>
-import headerContainer from "../widgets/header-container/header-container.vue";
+import HeaderContainer from "../widgets/header-container/HeaderContainer.vue";
 import { ref, onMounted } from "vue";
 import { fetchModelList } from "./apis/model";
 
