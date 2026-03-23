@@ -60,7 +60,7 @@ module.exports = {
         require(path.resolve(process.cwd(), `.${sep}app${sep}middleware.js`))(app);
         console.log("--- [loader] global middleware done ---");
       } catch (error) {
-        console.log("[exception] : there is on global middleware file.");
+        console.log("--- [exception] ---: there is on global middleware file.");
       }
 
       // 注册路由
