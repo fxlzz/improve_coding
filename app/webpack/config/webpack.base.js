@@ -128,7 +128,7 @@ module.exports = {
           reuseExistingChunk: true, // 复用已有的 chunk
         },
         commons: {
-          test: /[\\/]pages[\\/]/,
+          test: /[\\/]common|widgets[\\/]/,
           name: "commons",
           chunks: "all",
           minChunks: 2, // 最少引用次数
