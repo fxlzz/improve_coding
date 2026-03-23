@@ -4,7 +4,7 @@
       <el-row type="flex" align="middle" class="header-row">
         <!-- logo 区域 -->
         <el-row type="flex" align="middle" class="title-panel">
-          <img src="" class="logo" />
+          <img src="./assets/logo.jpg" class="logo" />
           <el-row class="text">{{ title }}</el-row>
         </el-row>
 
@@ -17,7 +17,7 @@
         <el-row type="flex" align="middle" justify="end" class="setting-panel">
           <!-- 插槽：设置区域 -->
           <slot name="setting-content"></slot>
-          <img src="" class="avatar" />
+          <img src="./assets/logo.jpg" class="avatar" />
           <el-dropdown @command="handleUserCommand">
             <span class="username">
               {{ userName }}<i class="el-icon-arrow-down el-icon--right"></i>

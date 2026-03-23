@@ -1,6 +1,6 @@
 module.exports = {
   name: "拼多多",
-  homePage: "",
+  homePage: "/todo?proj_key=pdd&key=product",
   desc: "拼多多模板",
   menu: [
     {
@@ -10,6 +10,25 @@ module.exports = {
       moduleType: "iframe",
       iframeConfig: {
         path: "http://wwww.baidu.com",
+      },
+    },
+    {
+      key: "client",
+      name: "用户管理（拼多多版）",
+      menuType: "module",
+      moduleType: "sider",
+      siderConfig: {
+        menu: [
+          {
+            key: "list",
+            name: "侧边栏1",
+            menuType: "module",
+            moduleType: "custom",
+            customConfig: {
+              path: "/todo",
+            },
+          },
+        ],
       },
     },
     {

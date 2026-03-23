@@ -1,6 +1,6 @@
 module.exports = {
   name: "淘宝",
-  homePage: "",
+  homePage: "/todo?proj_key=tabao&key=product",
   desc: "淘宝模板",
   menu: [
     {

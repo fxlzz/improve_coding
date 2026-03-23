@@ -4,7 +4,7 @@ import { createApp } from "vue";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
-import { ElIcon } from "element-plus";
+import "element-plus/theme-chalk/dark/css-vars.css";
 
 // 引入 pinia
 import pinia from "@stores";
@@ -24,8 +24,6 @@ const boat = (pageComponent, { routes, libs } = {}) => {
   app.use(ElementPlus, {
     locale: zhCn,
   });
-
-  app.component("EIcon", ElIcon);
 
   app.use(pinia);
 
