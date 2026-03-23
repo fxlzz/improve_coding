@@ -1,4 +1,4 @@
-import boat from "../boat";
+import boot from "../boot";
 import projectList from "./project-list.vue";
 
-boat(projectList);
+boot(projectList);

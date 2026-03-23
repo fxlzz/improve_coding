@@ -1,6 +1,6 @@
 module.exports = {
   mode: "dashboard",
-  name: "buiness",
+  name: "电商系统",
   desc: "电商系统模板",
   menu: [
     {

@@ -48,6 +48,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: businessPath,
+        exclude: /\.vue$/,
         use: "swc-loader",
       },
       {
@@ -59,7 +60,7 @@ module.exports = {
         use: ["style-loader", "css-loader", "less-loader"],
       },
       {
-        test: /\.(png|jpeg|gif)(\?.+)?$/,
+        test: /\.(jpg|png|jpeg|gif)(\?.+)?$/,
         use: {
           loader: "url-loader",
           options: {
@@ -84,6 +85,7 @@ module.exports = {
       "@stores": path.resolve(businessPath, "./stores"),
       "@utils": path.resolve(businessPath, "./utils"),
       "@apis": path.resolve(businessPath, "./apis"),
+      "@widgets": path.resolve(businessPath, "./widgets"),
     },
   },
   // 插件配置（在合适的时机干预 webpack 解析）
@@ -126,7 +128,7 @@ module.exports = {
           reuseExistingChunk: true, // 复用已有的 chunk
         },
         commons: {
-          test: /[\\/]pages[\\/]/,
+          test: /[\\/]common|widgets[\\/]/,
           name: "commons",
           chunks: "all",
           minChunks: 2, // 最少引用次数
