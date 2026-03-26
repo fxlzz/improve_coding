@@ -62,4 +62,7 @@ const getProjectConfig = async () => {
 </script>
 
 <style lang="less" scoped>
+:deep(.el-main) {
+  padding: 0;
+}
 </style>

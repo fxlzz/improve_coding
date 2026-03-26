@@ -36,9 +36,21 @@ export const useMenuStore = defineStore("menu", () => {
     }
   };
 
+  /**
+   * 找到 menu 的第一个选项
+   * @param {*} mList
+   */
+  const findFirstMenuItem = (mList = menuList.value) => {
+    if (!Array.isArray(mList) || !mList.length || !mList[0]) return;
+
+    if (!mList[0].submenu) return mList[0];
+    if (mList[0].submenu) return mList[0].submenu[0];
+  };
+
   return {
     menuList,
     setMenuList,
     findMenuItem,
+    findFirstMenuItem,
   };
 });

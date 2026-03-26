@@ -1,5 +1,8 @@
 import { createApp } from "vue";
 
+// 全局样式
+import "./asserts/common.css";
+
 // 引入 ElementPlus
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
