@@ -105,21 +105,10 @@ const handleMenuSelect = (menuKey) => {
   });
 };
 
-watch(
-  () => routes.query.key,
-  () => {
-    setActiveKey();
-    setMenuList();
-  }
-);
-
-watch(
-  () => menuStore.menuList,
-  () => {
-    setActiveKey();
-    setMenuList();
-  }
-);
+watch([() => menuStore.menuList, () => routes.query.key], () => {
+  setActiveKey();
+  setMenuList();
+});
 
 onMounted(() => {
   setActiveKey();
