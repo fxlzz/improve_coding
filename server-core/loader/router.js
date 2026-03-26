@@ -21,7 +21,7 @@ module.exports = (app) => {
 
   const indexPath = app?.options?.index ?? "/";
   router.get(/(.*)/, async (ctx, next) => {
-    if (ctx.path === indexPath || ctx.path === "/") {
+    if (ctx.path === indexPath) {
       return next();
     }
     ctx.status = 302;

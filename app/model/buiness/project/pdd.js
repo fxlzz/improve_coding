@@ -28,6 +28,40 @@ module.exports = {
               path: "/todo",
             },
           },
+          {
+            key: "list2",
+            name: "侧边栏2",
+            menuType: "module",
+            moduleType: "iframe",
+            iframeConfig: {
+              path: "http://www.baidu.com",
+            },
+          },
+          {
+            key: "list3",
+            name: "侧边栏3",
+            menuType: "group",
+            submenu: [
+              {
+                key: "one",
+                name: "一级标签",
+                menuType: "module",
+                moduleType: "iframe",
+                iframeConfig: {
+                  path: "http://www.baidu.com",
+                },
+              },
+              {
+                key: "two",
+                name: "二级标签",
+                menuType: "module",
+                moduleType: "custom",
+                customConfig: {
+                  path: "/todo",
+                },
+              },
+            ],
+          },
         ],
       },
     },
