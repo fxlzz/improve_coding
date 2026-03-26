@@ -1,14 +1,15 @@
-html,
-body {
-  height: 100%;
-}
-
-:root {
-  height: 100%;
-}
-
+:root,
+body,
 #app {
   height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 input:-webkit-autofill {

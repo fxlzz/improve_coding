@@ -106,19 +106,9 @@ onMounted(() => {
   setActiveKey();
 });
 
-watch(
-  () => routes?.query?.key,
-  () => {
-    setActiveKey();
-  }
-);
-
-watch(
-  () => menuStore.menuList,
-  () => {
-    setActiveKey();
-  }
-);
+watch([() => menuStore.menuList, () => routes?.query?.key], () => {
+  setActiveKey();
+});
 </script>
 
 <style lang="less" scoped>
