@@ -58,6 +58,7 @@ const setActiveKey = () => {
       const siderMenuList = firstMenuItem.siderConfig.menu;
       siderMenuItem = menuStore.findFirstMenuItem(siderMenuList);
       if (siderMenuItem) {
+        activeKey.value = siderMenuItem.key;
         handleMenuSelect(siderMenuItem.key);
       }
     }
