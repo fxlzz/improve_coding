@@ -9,12 +9,15 @@
 import SerachPanel from "./serach-panel/SerachPanel.vue";
 import TablePanel from "./table-panel/TablePanel.vue";
 import { useSchema } from "./hook/schema.js";
+import { provide } from "vue";
 
-const { api } = useSchema();
+const { api, tableSchema, tableConfig } = useSchema();
 
-setTimeout(() => {
-  console.log(api.value);
-}, 1000);
+provide("schemaViewData", {
+  api,
+  tableSchema,
+  tableConfig,
+});
 </script>
 
 <style lang="less" scoped>

@@ -32,10 +32,34 @@ module.exports = {
               ...schema,
               type: "", // 字段类型
               label: "", // 字段中文名
+              // 字段在 table 中的相关配置
+              tableOption: {
+                ...elTableColumnConfig, // 标准 el-table-column 配置
+                visiable: true, // true 在表格中展示
+              },
             },
           },
         },
-        tableConfig: {},
+        // table 相关配置
+        tableConfig: {
+          headerButtons: [
+            // 描述每一个button
+            {
+              labelKey: "", // 描述button文本
+              eventKey: "", // 事件描述
+              eventOptions: {}, // 事件相关配置
+              ...elButtonConfig, // el-button 配置
+            },
+          ],
+          rowButtons: [
+            {
+              labelKey: "", // 描述button文本
+              eventKey: "", // 事件描述
+              eventOptions: {}, // 事件相关配置
+              ...elButtonConfig, // el-button 配置
+            },
+          ],
+        },
         serachConfig: {},
         components: {},
       },

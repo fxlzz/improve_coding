@@ -47,9 +47,10 @@ module.exports = {
                 key: "one",
                 name: "一级标签",
                 menuType: "module",
-                moduleType: "iframe",
-                iframeConfig: {
-                  path: "http://www.baidu.com",
+                moduleType: "schema",
+                schemaConfig: {
+                  api: "/api/client",
+                  schema: {},
                 },
               },
               {
