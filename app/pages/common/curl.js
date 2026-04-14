@@ -28,6 +28,17 @@ const curl = ({
   const sRand = Math.random().toString(36).substring(2, 15);
   const signature = md5(`${signKey}_${st}_${sRand}`);
 
+  const dtoHeaders = {
+    ...headers,
+    s_t: st,
+    s_sign: signature,
+    s_rand: sRand,
+  };
+
+  if (url.startsWith("/api/proj") && window.proj_key) {
+    dtoHeaders.proj_key = window.proj_key;
+  }
+
   const settings = {
     url,
     method,
@@ -35,12 +46,7 @@ const curl = ({
     data: body,
     timeout,
     responseType,
-    headers: {
-      ...headers,
-      s_t: st,
-      s_sign: signature,
-      s_rand: sRand,
-    },
+    headers: dtoHeaders,
   };
 
   return axios
@@ -57,6 +63,8 @@ const curl = ({
           ElMessage.error("参数校验失败");
         } else if (code === 445 || code === 446) {
           ElMessage.error("请求非法或超时");
+        } else if (code === 441) {
+          ElMessage.error("项目异常");
         } else if (code === 500) {
           ElMessage.error(message);
         } else if (code === 50000) {
@@ -65,6 +73,7 @@ const curl = ({
           ElMessage.error(errorMessage);
         }
 
+        console.error(message);
         return Promise.reject(resData);
       }
 

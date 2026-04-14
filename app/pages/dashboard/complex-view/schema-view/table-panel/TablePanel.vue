@@ -6,10 +6,12 @@
       class="operation-panel"
     >
       <el-button
-        v-for="item in headerButtons"
+        v-for="(item, index) in headerButtons"
+        :key="index"
         v-bind="item"
         @click="operationHandler({ btnConfig: item })"
-        >{{ item.label }}
+      >
+        {{ item.label }}
       </el-button>
     </el-row>
     <SchemaTable
@@ -84,7 +86,7 @@ async function removeData({ btnConfig, rowData }) {
     });
     schemaTableRef.value.hiddenLoading();
 
-    if (!res || !res.success || !res.data) {
+    if (!res || !res.data) {
       return;
     }
 

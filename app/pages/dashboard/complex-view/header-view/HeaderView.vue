@@ -34,7 +34,7 @@
           </el-icon>
         </span>
         <template v-if="projectStore.projectList.length > 1" #dropdown>
-          <el-drop-menu>
+          <el-dropdown-menu>
             <el-dropdown-item
               v-for="item in projectStore.projectList.filter(
                 (proj) => proj.name !== projName
@@ -45,7 +45,7 @@
             >
               {{ item.name }}
             </el-dropdown-item>
-          </el-drop-menu>
+          </el-dropdown-menu>
         </template>
       </el-dropdown>
     </template>

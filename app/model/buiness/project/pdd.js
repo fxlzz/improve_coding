@@ -7,11 +7,6 @@ module.exports = {
       key: "product",
       name: "商品管理（拼多多版）",
       menuType: "module",
-      moduleType: "schema",
-      schemaConfig: {
-        api: "/api/product",
-        schema: {},
-      },
     },
     {
       key: "client",
