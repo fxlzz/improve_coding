@@ -97,9 +97,8 @@ const handleCommand = (projKey) => {
     (item) => item.key === projKey
   );
   if (!projItem || !projItem.homePage) return;
-  const { origin, pathname } = window.location;
-  window.location.replace(`${origin}${pathname}#${projItem.homePage}`);
-  window.location.reload();
+  const { host } = window.location;
+  window.location.replace(`http://${host}/views/dashboard${projItem.homePage}`);
 };
 
 onMounted(() => {
