@@ -64,7 +64,7 @@ onMounted(() => {
 
 const onEnter = (project) => {
   const { origin } = window.location;
-  window.open(`${origin}/views/dashboard#${project.homePage}`);
+  window.open(`${origin}/views/dashboard${project.homePage}`);
 };
 </script>
 

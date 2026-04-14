@@ -13,7 +13,7 @@ import "element-plus/theme-chalk/dark/css-vars.css";
 import pinia from "@stores";
 
 // 引入 router
-import { createWebHashHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from "vue-router";
 
 /**
  * Vue 工程启动入口
@@ -38,7 +38,7 @@ const boat = (pageComponent, { routes, libs } = {}) => {
 
   if (routes && routes.length > 0) {
     const router = createRouter({
-      history: createWebHashHistory(),
+      history: createWebHistory(),
       routes,
     });
 

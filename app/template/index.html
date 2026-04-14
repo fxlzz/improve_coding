@@ -7,5 +7,9 @@
   </head>
   <body>
     <div id="app"></div>
+    <script>
+      const params = new URLSearchParams(window?.location?.search);
+      window.proj_key = params.get("proj_key") || "default";
+    </script>
   </body>
 </html>

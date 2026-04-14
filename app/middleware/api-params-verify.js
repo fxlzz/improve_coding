@@ -60,7 +60,10 @@ module.exports = (app) => {
       app.logger.error(
         `[${method} ${path}] - API 参数校验失败: ${ajv.errorsText(validate.errors)}`,
       );
-      throw BizError(CODE_API_PARAMS_VERIFY_ERROR, `API 参数校验失败: ${ajv.errorsText(validate.errors)}`);
+      throw BizError(
+        CODE_API_PARAMS_VERIFY_ERROR,
+        `API 参数校验失败: ${ajv.errorsText(validate.errors)}`,
+      );
     }
 
     await next();

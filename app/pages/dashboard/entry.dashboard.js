@@ -3,26 +3,26 @@ import DashBoard from "./dashboard.vue";
 
 const routes = [
   {
-    path: "/header",
+    path: "/views/dashboard/header",
     component: () => import("./complex-view/header-view/HeaderView.vue"),
   },
   {
-    path: "/iframe",
+    path: "/views/dashboard/iframe",
     component: () => import("./complex-view/iframe-view/IframeView.vue"),
   },
   {
-    path: "/schema",
+    path: "/views/dashboard/schema",
     component: () => import("./complex-view/schema-view/SchemaView.vue"),
   },
   {
-    path: "/todo",
+    path: "/views/dashboard/todo",
     component: () => import("./todo/Todo.vue"),
   },
 ];
 
 // 侧边栏路由
 routes.push({
-  path: "/sider",
+  path: "/views/dashboard/sider",
   component: () => import("./complex-view/sider-view/SiderView.vue"),
   children: [
     {
@@ -42,7 +42,7 @@ routes.push({
 
 // 侧边栏兜底路由
 routes.push({
-  path: "/sider/:any",
+  path: "/views/dashboard/sider/:any",
   component: () => import("./complex-view/sider-view/SiderView.vue"),
 });
 

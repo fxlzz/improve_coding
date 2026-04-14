@@ -102,6 +102,7 @@ module.exports = {
     new webpack.DefinePlugin({
       __VUE_OPTIONS_API__: "true", // 支持 vue 解析 optionsAPI
       __VUE_PROD_DEVTOOLS__: "false", // 解析过程中禁用调式工具
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "false", // 启用生产环境 hydration 不匹配详情（可选，通常设为 false 以减小体积）
     }),
     // 构建最终产物
     ...htmlWebpackPluginList,

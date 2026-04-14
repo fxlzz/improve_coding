@@ -36,4 +36,7 @@ module.exports = (app) => {
 
   // API 参数校验
   app.use(app.middlewares.apiParamsVerify);
+
+  // 过滤 project 相关内容
+  app.use(app.middlewares.projectHandler);
 };

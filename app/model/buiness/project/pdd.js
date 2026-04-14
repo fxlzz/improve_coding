@@ -1,16 +1,12 @@
 module.exports = {
   name: "拼多多",
-  homePage: "/todo?proj_key=pdd&key=product",
+  homePage: "/schema?proj_key=pdd&key=product",
   desc: "拼多多模板",
   menu: [
     {
       key: "product",
       name: "商品管理（拼多多版）",
       menuType: "module",
-      moduleType: "iframe",
-      iframeConfig: {
-        path: "http://wwww.baidu.com",
-      },
     },
     {
       key: "client",
@@ -46,9 +42,10 @@ module.exports = {
                 key: "one",
                 name: "一级标签",
                 menuType: "module",
-                moduleType: "iframe",
-                iframeConfig: {
-                  path: "http://www.baidu.com",
+                moduleType: "schema",
+                schemaConfig: {
+                  api: "/api/client",
+                  schema: {},
                 },
               },
               {
