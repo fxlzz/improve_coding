@@ -45,15 +45,19 @@ module.exports = {
           headerButtons: [
             // 描述每一个button
             {
-              labelKey: "", // 描述button文本
+              label: "", // 描述button文本
               eventKey: "", // 事件描述
-              eventOptions: {}, // 事件相关配置
+              eventOptions: {
+                params: {
+                  paramKey: paramValue,
+                },
+              }, // 事件相关配置
               ...elButtonConfig, // el-button 配置
             },
           ],
           rowButtons: [
             {
-              labelKey: "", // 描述button文本
+              label: "", // 描述button文本
               eventKey: "", // 事件描述
               eventOptions: {}, // 事件相关配置
               ...elButtonConfig, // el-button 配置

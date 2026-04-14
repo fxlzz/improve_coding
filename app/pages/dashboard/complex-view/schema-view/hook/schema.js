@@ -21,7 +21,7 @@ export const useSchema = () => {
     });
 
     if (menuItem && menuItem.schemaConfig) {
-      const { api: apiUrl, schema } = menuItem.schemaConfig;
+      const { api: apiUrl, schema, tableConfig: tableCfg } = menuItem.schemaConfig;
 
       const configSchema = JSON.parse(JSON.stringify(schema));
 
@@ -31,7 +31,7 @@ export const useSchema = () => {
 
       nextTick(() => {
         tableSchema.value = buildDtoSchema(configSchema, "table");
-        tableConfig.value = configSchema.tableConfig;
+        tableConfig.value = tableCfg;
       });
     }
   };
@@ -48,7 +48,7 @@ export const useSchema = () => {
     };
 
     // 提取 schema 中有效字段
-    for (const key of _schema.properties) {
+    for (const key in _schema.properties) {
       const props = _schema.properties[key];
       if (props[`${keyword}Option`]) {
         let dtoProps = {};

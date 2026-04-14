@@ -9,7 +9,7 @@ module.exports = {
       menuType: "module",
       moduleType: "schema",
       schemaConfig: {
-        api: "/api/client",
+        api: "/api/product",
         schema: {},
       },
     },

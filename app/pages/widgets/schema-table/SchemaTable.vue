@@ -2,11 +2,11 @@
   <div class="schema-table">
     <el-table
       v-if="schema && schema.properties"
-      v-loading="loadding"
+      v-loading="loading"
       :data="tableData"
       class="table"
     >
-      <template v-for="(schemaItem, key) in schema.properties">
+      <template v-for="(schemaItem, key) in schema?.properties">
         <el-table-column
           v-if="schemaItem.option.visiable !== false"
           :key="key"
@@ -72,7 +72,7 @@ const { api, schema, buttons } = toRefs(props);
 const emit = defineEmits(["operate"]);
 
 const tableData = ref([]);
-const loadding = ref(false);
+const loading = ref(false);
 const pageParams = reactive({
   currentPage: 1,
   pageSize: 20,
@@ -111,11 +111,12 @@ const initData = () => {
   });
 };
 
+// 节流函数，防止因为依赖变化，导致的多次接口请求
 let timer = null;
 const loadTableData = async () => {
   clearTimeout(timer);
-  timer = setTimeout(() => {
-    fetchData();
+  timer = setTimeout(async () => {
+    await fetchData();
     timer = null;
   }, 100);
 };
@@ -128,6 +129,10 @@ const fetchData = async () => {
   const res = await curl({
     method: "get",
     url: `${api.value}/list`,
+    query: {
+      page: pageParams.currentPage,
+      size: pageParams.pageSize,
+    },
   });
 
   hiddenLoading();
@@ -147,7 +152,7 @@ const buildTableData = (tableData) => {
   if (!schema.value?.properties) {
     return tableData;
   }
-  return tableData.map((rowData) => {
+  return tableData?.map((rowData) => {
     for (const dKey in rowData) {
       const schemaItem = schema.value.properties[dKey];
       if (schemaItem?.option?.toFixed) {
