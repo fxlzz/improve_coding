@@ -1,0 +1,63 @@
+<template>
+  <el-select v-model="dtoValue" v-bind="schema.option" class="dynamic-select">
+    <el-option
+      v-for="item in enumList"
+      :key="item.label"
+      :value="item.value"
+      :label="item.label"
+    />
+  </el-select>
+</template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+import curl from "@common/curl";
+
+const { schemaKey, schema } = defineProps({
+  schemaKey: String,
+  schema: Object,
+});
+const emit = defineEmits(["loaded"]);
+
+const dtoValue = ref();
+const getValue = () => {
+  return dtoValue.value !== undefined
+    ? {
+        [schemaKey]: dtoValue.value,
+      }
+    : {};
+};
+
+const enumList = ref([]);
+const fetchEnumList = async () => {
+  const res = await curl({
+    url: schema.option.api,
+    method: "get",
+  });
+
+  if (!res || !res.data) {
+    enumList.value = [];
+    return;
+  }
+
+  enumList.value = res.data;
+};
+
+const reset = () => {
+  dtoValue.value = schema?.option?.defualt ?? enumList.value[0].value;
+};
+
+onMounted(async () => {
+  await fetchEnumList();
+  reset();
+  emit("loaded");
+});
+
+defineExpose({
+  getValue,
+  reset,
+});
+</script>
+
+<style lang="less" scoped>
+</style>

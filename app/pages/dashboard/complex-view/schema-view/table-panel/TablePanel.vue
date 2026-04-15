@@ -18,6 +18,7 @@
       ref="schemaTableRef"
       :schema="tableSchema"
       :api="api"
+      :api-params="apiParams"
       :buttons="rowButtons"
       @operate="operationHandler"
     />
@@ -30,7 +31,7 @@ import { ElMessageBox, ElNotification } from "element-plus";
 import curl from "@common/curl.js";
 import SchemaTable from "@widgets/schema-table/SchemaTable.vue";
 
-const { api, tableSchema, tableConfig } = inject("schemaViewData");
+const { api, apiParams, tableSchema, tableConfig } = inject("schemaViewData");
 
 const headerButtons = computed(() => tableConfig.value?.headerButtons || []);
 const rowButtons = computed(() => tableConfig.value?.rowButtons || []);

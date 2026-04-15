@@ -6,6 +6,8 @@ export const useSchema = () => {
   const api = ref("");
   const tableSchema = ref({});
   const tableConfig = ref({});
+  const searchSchema = ref({});
+  const searchConfig = ref({});
 
   const routes = useRoute();
   const { key, sider_key: siderKey } = routes.query;
@@ -21,17 +23,28 @@ export const useSchema = () => {
     });
 
     if (menuItem && menuItem.schemaConfig) {
-      const { api: apiUrl, schema, tableConfig: tableCfg } = menuItem.schemaConfig;
+      const sConfig = menuItem.schemaConfig;
 
-      const configSchema = JSON.parse(JSON.stringify(schema));
+      const configSchema = JSON.parse(JSON.stringify(sConfig.schema));
 
-      api.value = apiUrl;
+      api.value = sConfig.api;
       tableSchema.value = {};
       tableConfig.value = {};
+      searchSchema.value = {};
+      searchConfig.value = {};
 
       nextTick(() => {
+        // 处理 table 相关配置
         tableSchema.value = buildDtoSchema(configSchema, "table");
-        tableConfig.value = tableCfg;
+        tableConfig.value = sConfig.tableConfig;
+
+        // 处理 search 相关配置
+        const dtosearchSchema = buildDtoSchema(configSchema, "search");
+        for (const key in dtosearchSchema.properties) {
+          dtosearchSchema.properties[key].option.default = routes.query[key];
+        }
+        searchSchema.value = dtosearchSchema;
+        searchConfig.value = sConfig.searchConfig;
       });
     }
   };
@@ -83,5 +96,7 @@ export const useSchema = () => {
     api,
     tableSchema,
     tableConfig,
+    searchSchema,
+    searchConfig,
   };
 };

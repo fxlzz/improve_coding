@@ -28,4 +28,7 @@ module.exports = {
       requried: ["product_id"],
     },
   },
+  "/api/proj/project_name/list": {
+    get: {},
+  },
 };

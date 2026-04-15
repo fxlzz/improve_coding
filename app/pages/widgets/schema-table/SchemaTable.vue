@@ -52,6 +52,7 @@
 <script setup>
 const props = defineProps({
   api: String,
+  apiParams: Object,
   schema: Object,
   buttons: Array,
 });
@@ -67,7 +68,7 @@ import {
 } from "vue";
 import curl from "@common/curl.js";
 
-const { api, schema, buttons } = toRefs(props);
+const { api, schema, buttons, apiParams } = toRefs(props);
 
 const emit = defineEmits(["operate"]);
 
@@ -83,7 +84,7 @@ onMounted(() => {
   initData();
 });
 
-watch([schema, api], () => {
+watch([schema, api, apiParams], () => {
   initData();
 });
 
@@ -130,6 +131,7 @@ const fetchData = async () => {
     method: "get",
     url: `${api.value}/list`,
     query: {
+      ...apiParams.value,
       page: pageParams.currentPage,
       size: pageParams.pageSize,
     },
