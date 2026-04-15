@@ -1,6 +1,6 @@
 module.exports = {
   name: "淘宝",
-  homePage: "/todo?proj_key=tabao&key=product",
+  homePage: "/schema?proj_key=tabao&key=product",
   desc: "淘宝模板",
   menu: [
     {
@@ -22,25 +22,22 @@ module.exports = {
           key: "test1",
           name: "测试数据1",
           menuType: "module",
-          moduleType: "custom",
-          customConfig: {
-            path: "/todo",
+          moduleType: "sider",
+          siderConfig: {
+            menu: [
+              {
+                key: "dianshang",
+                name: "电商罗盘",
+                menuType: "module",
+                moduleType: "iframe",
+                iframeConfig: {
+                  path: "http://www.baidu.com",
+                },
+              },
+            ],
           },
         },
       ],
-      siderConfig: {
-        menu: [
-          {
-            key: "dianshang",
-            name: "电商罗盘",
-            menuType: "module",
-            moduleType: "iframe",
-            iframeConfig: {
-              path: "http://www.baidu.com",
-            },
-          },
-        ],
-      },
     },
   ],
 };

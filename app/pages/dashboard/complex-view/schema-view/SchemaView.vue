@@ -1,23 +1,34 @@
 <template>
   <el-row class="schema-container">
-    <SerachPanel></SerachPanel>
-    <TablePanel></TablePanel>
+    <SearchPanel @search="onSearch" />
+    <TablePanel @operate="onTableOperate" />
   </el-row>
 </template>
 
 <script setup>
-import SerachPanel from "./serach-panel/SerachPanel.vue";
+import SearchPanel from "./search-panel/SearchPanel.vue";
 import TablePanel from "./table-panel/TablePanel.vue";
 import { useSchema } from "./hook/schema.js";
-import { provide } from "vue";
+import { provide, ref } from "vue";
 
-const { api, tableSchema, tableConfig } = useSchema();
+let apiParams = ref({});
+const { api, tableSchema, tableConfig, searchConfig, searchSchema } =
+  useSchema();
 
 provide("schemaViewData", {
   api,
+  apiParams,
   tableSchema,
   tableConfig,
+  searchSchema,
+  searchConfig,
 });
+
+const onSearch = (searchObj) => {
+  apiParams.value = searchObj;
+};
+
+const onTableOperate = () => {};
 </script>
 
 <style lang="less" scoped>

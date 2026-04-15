@@ -29,13 +29,25 @@ module.exports = {
           properties: {
             key: {
               // 属性描述
-              ...schema,
+              ...schema, // json-schema 其他属性
               type: "", // 字段类型
               label: "", // 字段中文名
-              // 字段在 table 中的相关配置
+              // tableOption： 描述 key 这个字段，在 table UI 中的展示
               tableOption: {
                 ...elTableColumnConfig, // 标准 el-table-column 配置
                 visiable: true, // true 在表格中展示
+              },
+              // searchOption： 描述 key 这个字段，在 search UI 中的展示
+              searchOption: {
+                ...elComponentConfig, // el中所有支持的属性 -- 透传
+                comType: "", // 搜索表单类型 input/select/dynamicSelect/dateRange/....
+                default: "", // 默认值
+
+                // 当 comType == select 时
+                enumList: [],
+
+                // 当 comType == dynamicSelect 时，
+                api: "", // 数据接口地址
               },
             },
           },
@@ -64,7 +76,7 @@ module.exports = {
             },
           ],
         },
-        serachConfig: {},
+        searchConfig: {},
         components: {},
       },
     },
